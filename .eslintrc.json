@@ -1,0 +1,52 @@
+{
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+      "eslint:recommended",
+      // "airbnb",
+      // "airbnb/hooks",
+      "plugin:react/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:jsx-a11y/recommended",
+      "plugin:react-hooks/recommended"
+      // always put prettier at last
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true // enable linting for jsx files
+      },
+      "ecmaVersion": 11,
+      "sourceType": "module"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "plugins": ["react", "react-hooks"],
+    "rules": {
+      // NextJs specific fix: suppress errors for missing 'import React' in files for nextjs
+      "react/react-in-jsx-scope": "off",
+     // NextJs specific fix: allow jsx syntax in js files
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], //should add ".ts" if typescript project
+      "no-unused-vars": ["warn"],
+      "react/jsx-no-target-blank": "off",
+      "react/no-unescaped-entities": "off",
+      "no-useless-escape": "off",
+      "no-irregular-whitespace": "off",
+      "no-console": "warn",
+      "react/display-name": ["warn"],
+      "react/forbid-prop-types": ["error", {"forbid": ["any"]}],
+      "react/prop-types": ["error", { "ignore": ["children", "match", "location", "history", "input", "meta", "responsive", "dispatch"], "skipUndeclared": true }]
+    }
+  }
