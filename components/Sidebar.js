@@ -9,7 +9,7 @@ import MoreVertIcon        from '@material-ui/icons/MoreVert';
 import SearchIcon          from '@material-ui/icons/Search';
 import * as EmailValidator from 'email-validator';
 import Chat                from './Chat';
-import { auth, db  }       from '../firebase';
+import { auth, db }        from '../firebase';
 
 
 export default function Sidebar() {
@@ -37,7 +37,10 @@ export default function Sidebar() {
   return (
     <Container>
       <Header>
-        <UserAvatar onClick={() => auth.signOut()} />
+        <UserAvatar
+          src={user.photoURL}
+          onClick={() => auth.signOut()}
+        />
 
         <IconsContainer>
           <IconButton>
@@ -60,7 +63,7 @@ export default function Sidebar() {
         <Chat
           key={chat.id}
           id={chat.id}
-          user={chat.data().users}
+          users={chat.data().users}
         />
       ))}
     </Container>
