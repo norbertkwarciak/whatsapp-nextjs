@@ -14,7 +14,7 @@ export default function Chat({ id, users }) {
 
   const recipientEmail = getRecipientEmail(users, user);
   const [recipientSnapshot] = useCollection(db.collection('users').where('email', '==', recipientEmail));
-  const recipient = recipientSnapshot?.docs[0]?.data();
+  const recipient = recipientSnapshot?.docs?.[0]?.data();
 
   const enterChat = () => {
     router.push(`/chat/${id}`);
