@@ -1,4 +1,4 @@
-import { useState }           from 'react';
+import { useState, useRef }   from 'react';
 import { useAuthState }       from 'react-firebase-hooks/auth';
 import { useCollection }      from 'react-firebase-hooks/firestore';
 import TimeAgo                from 'timeago-react';
@@ -34,6 +34,14 @@ export default function ChatScreen({chat, messages}) {
   );
 
   const [input, setInput] = useState('');
+  const endOfMessagesRef = useRef(null);
+
+  const scrollToBottom = () => {
+    endOfMessagesRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  };
 
   const sendMessage = e => {
     e.preventDefault();
@@ -51,7 +59,8 @@ export default function ChatScreen({chat, messages}) {
     })
 
     setInput('');
-  }
+    scrollToBottom();
+  };
 
   const showMessages = () => {
     if (messagesSnapshot) {
@@ -112,7 +121,7 @@ export default function ChatScreen({chat, messages}) {
 
       <MessageContainer>
         {showMessages()}
-        <EndOfMessage />
+        <EndOfMessage ref={endOfMessagesRef} />
       </MessageContainer>
 
       <InputContainer>
@@ -189,4 +198,6 @@ const MessageContainer = styled.div`
   min-height: 90vh;
 `;
 
-const EndOfMessage = styled.div``;
+const EndOfMessage = styled.div`
+  margin-bottom: 50px;
+`;
